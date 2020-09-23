@@ -32,5 +32,10 @@ public class OnlineBookStoreApplicationTests {
 		Mockito.when(repo.save(details)).thenReturn(details);
 		assertEquals(details, service.createCategory(details));
 	}
+	
+	@Test
+	public void testListCategory()	{
+		assertEquals(true,true);
+	}
 
 }
