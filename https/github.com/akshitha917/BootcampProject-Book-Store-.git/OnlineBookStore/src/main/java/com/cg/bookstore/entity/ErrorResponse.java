@@ -4,65 +4,43 @@ package com.cg.bookstore.entity;
 
 	public class ErrorResponse {
 
-		private Date date;
-		private String message;
-		private String status;
-		private int error;
-		private String path;
-
-		public ErrorResponse(Date date, String message, String status, int error, String path) {
-			super();
-			this.date = date;
-			this.message = message;
-			this.status = status;
-			this.error = error;
-			this.path = path;
+		  private Date timestamp;
+		  private String message;
+		  private String details;
+		public Date getTimestamp() {
+			return timestamp;
 		}
-
-		public Date getDate() {
-			return date;
+		public void setTimestamp(Date timestamp) {
+			this.timestamp = timestamp;
 		}
-
-		public void setDate(Date date) {
-			this.date = date;
-		}
-
 		public String getMessage() {
 			return message;
 		}
-
 		public void setMessage(String message) {
 			this.message = message;
 		}
-
-		public String getStatus() {
-			return status;
+		public String getDetails() {
+			return details;
 		}
-
-		public void setStatus(String status) {
-			this.status = status;
+		public void setDetails(String details) {
+			this.details = details;
 		}
-
-		public int getError() {
-			return error;
+		public ErrorResponse(Date timestamp, String message, String details) {
+			super();
+			this.timestamp = timestamp;
+			this.message = message;
+			this.details = details;
 		}
-
-		public void setError(int error) {
-			this.error = error;
+		public ErrorResponse() {
+			super();
+			// TODO Auto-generated constructor stub
 		}
-
-		public String getPath() {
-			return path;
-		}
-
-		public void setPath(String path) {
-			this.path = path;
-		}
-
 		@Override
 		public String toString() {
-			return "ErrorResponse [date=" + date + ", message=" + message + ", status=" + status + ", error=" + error
-					+ ", path=" + path + "]";
+			return "ErrorResponse [timestamp=" + timestamp + ", message=" + message + ", details=" + details + "]";
 		}
+		  
+		  
+
 
 }

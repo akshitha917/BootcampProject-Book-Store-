@@ -1,18 +1,24 @@
 package com.cg.bookstore.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 @Entity
 public class Category {
 	
 	@Id
-	public long categoryId;
+	@GeneratedValue
+	private long categoryId;
 	
-	  @NotNull
-	  @Size(min=5, message="Name should have atleast 5 characters")
-	public String categoryName;
+	
+	@NotNull
+	@Min(value=5, message="Name should have atleast minimum 5 characters")
+    @Max(value=30, message="Name should not be greater than 30 characters")
+	private String categoryName;
+	  
 	public long getCategoryId() {
 		return categoryId;
 	}

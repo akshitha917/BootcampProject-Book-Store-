@@ -1,6 +1,8 @@
 package com.capg.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -34,8 +36,9 @@ public class OnlineBookStoreApplicationTests {
 	}
 	
 	@Test
-	public void testListCategory()	{
-		assertEquals(true,true);
+	public void testCategoryLIst() {
+		service.categoryList();
+		verify(repo).findAll();
 	}
 
 }

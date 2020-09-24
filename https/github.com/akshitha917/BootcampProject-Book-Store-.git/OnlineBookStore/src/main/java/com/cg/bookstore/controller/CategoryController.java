@@ -4,6 +4,8 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookstore.entity.Category;
-import com.cg.bookstore.exception.EmptyCategoryListException;
+import com.cg.bookstore.exception.InputInvalidException;
 import com.cg.bookstore.service.CategoryService;
-
+@Validated
 @RestController
 @RequestMapping("/bookstore")
 public class CategoryController {
@@ -24,26 +25,26 @@ public class CategoryController {
 		@Autowired
 		CategoryService service;
 
-		@PostMapping("/add")
-		@ResponseStatus(code = HttpStatus.CREATED)
-		public Category createCategory(@Valid @RequestBody Category categoryName) {
-			return service.createCategory(categoryName);
+		@PostMapping("/add")	
+		public ResponseEntity<Category> createCategory(@Valid @RequestBody   Category category){
+			return new ResponseEntity<Category>(service.createCategory(category),HttpStatus.CREATED);
 		}
-		
 
 		@GetMapping("/all")
-		public List<Category> categoryList() throws EmptyCategoryListException {
-			return service.categoryList();
+		public ResponseEntity<List<Category>> getAllAccounts() 
+		{
+			return new ResponseEntity<List<Category>>(service.categoryList(),HttpStatus.OK);
 		}
 
 		@DeleteMapping("/delete/categoryId/{categoryId}")
-		public void deleteCategory(@PathVariable long categoryId)  {
+		public ResponseEntity<String> deleteCategory(@PathVariable long categoryId) throws InputInvalidException  {
+			
 			service.deleteCategory(categoryId);
+			return new ResponseEntity<String>("Deleted the requested Id"+ " "+categoryId ,HttpStatus.OK);
 		}
 
 		@PutMapping("/update")
-		public Category editCategory(@Valid @RequestBody Category categoryName) {
-			return service.editCategory(categoryName);
+		public ResponseEntity<Category> editCategory(@Valid @RequestBody  Category category) {
+			return new ResponseEntity<Category>(service.editCategory(category),HttpStatus.OK);
 		}
-
 }
